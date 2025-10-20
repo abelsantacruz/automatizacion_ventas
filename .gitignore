@@ -1,0 +1,12 @@
+# Archivos temporales
+__pycache__/
+*.log
+*.tmp
+*.bak
+
+# Carpeta de resultados
+Output/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
