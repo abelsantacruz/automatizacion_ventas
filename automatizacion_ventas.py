@@ -95,7 +95,7 @@ def leer_excel(ruta_archivo: Path, info: Dict, logger: logging.Logger) -> pd.Dat
     # conversion de tipos 
     df["Quantity"] = pd.to_numeric(df["Quantity"], errors="coerce")
     df["UnitPrice"] = pd.to_numeric(df["UnitPrice"], errors="coerce")
-    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+    df["Date"] = pd.to_datetime(df["Date"].astype(str), dayfirst=True, errors="coerce")
 
     # validacion de datos invalidos
     errores = []
@@ -155,7 +155,7 @@ def procesar_mes(lista_archivos_mes: List[tuple], carpeta_destino: Path, logger:
 
     # concatenan los df ya ordenados
     consolidado = pd.concat(dataframes, ignore_index=True)
-    consolidado["Date"] = consolidado["Date"].dt.date
+    consolidado["Date"] = consolidado["Date"].dt.strftime("%d/%m/%Y")
     consolidado = consolidado.sort_values(by="Date")
 
     # se crea el ranking de productos
